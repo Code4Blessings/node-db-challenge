@@ -1,11 +1,14 @@
 const express = require('express');
-
-const projectsRouter = require('../projects/projects-router')
-const resourcesRouter = require('../reources/resources-router')
+const helmet = require('helmet');
 
 const server = express();
 
+const projectsRouter = require('../projects/projects-router');
+const resourcesRouter = require('../resources/resources-router');
+
+
 server.use(express.json());
+server.use(helmet());
 
 server.get('/', (req, res) => {
     res.send({
@@ -19,6 +22,7 @@ function logger(req, res, next) {
 }
 
 server.use('/api/projects', projectsRouter);
-server.use('/api/resources', resourcesRouter)
+server.use('/api/resources', resourcesRouter);
+server.use('/api/tasks', tasksRouter);
 
 module.exports = server;
