@@ -46,12 +46,12 @@ router.post('/', (req, res) => {
         description: req.body.description
     };
     dBase('projects').insert(data)
-        .then(postedAccount => {
+        .then(postedProject => {
             dBase('projects').where({
-                    id: postedAccount[0]
+                    id: postedProject[0]
                 }).first()
-                .then(newAccount => {
-                    res.status(201).json(newAccount);
+                .then(newProject => {
+                    res.status(201).json(newProject);
                 })
                 .catch(err => {
                     console.log(err);

@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
 //Get resource by ID
 
 router.get('/:id', (req, res) => {
-    const id = req.params.id
+    const id = req.params.id 
     dBase('resources'). where({
         id: id
     }).select('id')
