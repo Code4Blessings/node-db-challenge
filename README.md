@@ -53,10 +53,10 @@ Take the steps necessary to complete the project from scratch. Start by initiali
 Complete the following tasks:
 
 - [ ] Design the data model and use _knex migrations_ to create the database and tables needed to satisfy the following business rules:
-  - [ ] a `project` can have multiple `tasks`.
-  - [ ] a `task` belongs to only one `project`.
-  - [ ] a `project` can use multiple `resources`. Example of `resources` are: computer, conference room, microphone, delivery van.
-  - [ ] the same `resource` can be used in multiple `projects`.
+  - [X] a `project` can have multiple `tasks`. 1 to many
+  - [X] a `task` belongs to only one `project`. 1 to many--foreign key
+  - [ ] a `project` can use multiple `resources`. Example of `resources` are: computer, conference room, microphone, delivery van. 1 to many
+  - [ ] the same `resource` can be used in multiple `projects`. many to many
   - [ ] when adding `projects` the client must provide a name, the description is optional.
   - [ ] when adding `resources` the client must provide a name, the description is optional.
   - [ ] when adding a `task` the client must provide a description, the notes are optional.
@@ -74,25 +74,25 @@ Complete the following tasks:
 
 A `project` is what needs to be done. We want to store the following data about a `project`:
 
-- [ ] a unique ID.
-- [ ] a name. This column is required.
-- [ ] a description.
-- [ ] a boolean that indicates if the project has been completed. This column cannot be NULL, the default value should be `false`.
+- [X] a unique ID.
+- [X] a name. This column is required.
+- [X] a description.
+- [X]  a boolean that indicates if the project has been completed. This column cannot be NULL, the default value should be `false`.
 
 A `resource` is anything needed to complete a project, some examples are: a person, a tool, a meeting room or a software license. We want to store the following data about a `resource`:
 
-- [ ] a unique ID.
-- [ ] a name. This column is required.
-- [ ] a description.
+- [X] a unique ID.
+- [X] a name. This column is required.
+- [X] a description.
 
 The database should not allow resources with duplicate names.
 
 A `task` one of the steps needed to complete the project. We want to store the following data about an `task`.
 
-- [ ] a unique ID.
-- [ ] a description of what needs to be done. This column is required.
-- [ ] a notes column to add additional information.
-- [ ] a boolean that indicates if the task has been completed. This column cannot be NULL, the default value should be `false`.
+- [X] a unique ID.
+- [X] a description of what needs to be done. This column is required.
+- [X] a notes column to add additional information.
+- [X] a boolean that indicates if the task has been completed. This column cannot be NULL, the default value should be `false`.
 
 ## Stretch Problem
 
