@@ -38,15 +38,16 @@ router.get('/:id', (req, res) => {
         })
 })
 
-//Add An Account
+//Add A Project
 router.post('/', (req, res) => {
+    
     const data = {
         name: req.body.name,
-        budget: req.body.budget
+        description: req.body.description
     };
-    dBase('accounts').insert(data)
+    dBase('projects').insert(data)
         .then(postedAccount => {
-            dBase('accounts').where({
+            dBase('projects').where({
                     id: postedAccount[0]
                 }).first()
                 .then(newAccount => {
@@ -55,7 +56,7 @@ router.post('/', (req, res) => {
                 .catch(err => {
                     console.log(err);
                     res.status(500).json({
-                        errorMessage: "Account could not be created",
+                        errorMessage: "Project could not be created",
                         message: err.message
                     });
                 });
