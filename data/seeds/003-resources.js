@@ -1,12 +1,29 @@
 
 exports.seed = function(knex) {
-  return knex('table_name').del()
+  return knex('resources').truncate()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('resources').insert([
+        {
+          id: 1, 
+          project_id: 1,
+          name: 'laptop',
+          description: 'Macintosh Air'
+        },
+
+        {
+          id: 2, 
+          project_id: 3,
+          name: 'Desktop',
+          description: 'Hewlett Packard'
+        },
+
+        {
+          id: 3, 
+          project_id:  2,
+          name: 'meeting room',
+          description: 'A quite place for a small group to do their projects'
+        }
       ]);
     });
 };
