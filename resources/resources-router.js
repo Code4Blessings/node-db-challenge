@@ -2,15 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const db = require('../data/dbConfig');
+const dBase = require('../data/dbConfig');
 
-const Resources = require('./resources-model')
-
-
-//Get projects list
+//Get resources list
 
 router.get('/', (req, res) => {
-   Resources.resourceList()
+ dBase.select('*')
+       .from('resources')
     .then(resources => {
         res.status(200).json(resources)
     })
@@ -18,6 +16,24 @@ router.get('/', (req, res) => {
         console.log(err);
         res.status(500).json({ 
             errorMessage: "Error retrieving the list of resources"
+        })
+    })
+})
+
+//Get resource list by id
+
+router.get('/:id', (req, res) => {
+    const id = req.params.id
+    dBase('resources'). where({
+        id: id
+    }).select('id')
+    .then(resourceId => {
+        res.status(200).json(resourceId)
+    })
+    .catch(err => {
+        res.status(500).json({
+            errorMessage: "Resource ID cannot be retrieved",
+            message: err.message
         })
     })
 })
@@ -47,6 +63,24 @@ router.post('/', (req, res) => {
         })
 
 });
+
+//Get resource by ID
+
+router.get('/:id', (req, res) => {
+    const id = req.params.id
+    dBase('resources'). where({
+        id: id
+    }).select('id')
+    .then(resourceId => {
+        res.status(200).json(resourceId)
+    })
+    .catch(err => {
+        res.status(500).json({
+            errorMessage: "Resource ID cannot be retrieved",
+            message: err.message
+        })
+    })
+})
 
 
 

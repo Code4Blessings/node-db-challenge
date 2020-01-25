@@ -4,6 +4,8 @@ const router = express.Router();
 
 const dBase = require('../data/dbConfig')
 
+//Get project list
+
 router.get('/', (req, res) => {
     dBase.select('*')
     .from('projects')

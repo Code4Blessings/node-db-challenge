@@ -3,6 +3,5 @@ module.exports = {
 }
 
 function resourceList() {
-    return db.select('*')
-        .from('resources')
+    return
 }
