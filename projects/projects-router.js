@@ -2,33 +2,43 @@ const express = require('express');
 
 const router = express.Router();
 
-const dBase = require('../data/dbConfig')
+const dB = require('../data/dbConfig');
 
-//Get project list
+const Projects = require('./projects-model')
+
+//Get projects list
 
 router.get('/', (req, res) => {
-    dBase.select('*')
-    .from('projects')
-    .then(projects => {
-        res.status(200).json(projects)
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({ 
-            errorMessage: "Error retrieving the list of projects"
+
+    Projects.find()
+        .then(projects => {
+            res.status(200).json(projects)
         })
-    })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                errorMessage: "Error retrieving the list of projects",
+                message: err.message
+            })
+        })
 })
 
-//Retrieve project list by id
+//Retrieve project by id
 
 router.get('/:id', (req, res) => {
-    const id = req.params.id
-    dBase('projects').where({
-            id: id
-        }).select('id')
-        .then(projectId => {
-            res.status(200).json(projectId)
+    const id = req.params.id;
+
+    Projects.findById(id)
+        .then(projects => {
+            const project = projects[0];
+
+            if (project) {
+                res.json(project);
+            } else {
+                res.status(404).json({
+                    errorMessage: 'Could not find project'
+                })
+            }
         })
         .catch(err => {
             res.status(500).json({
@@ -38,30 +48,42 @@ router.get('/:id', (req, res) => {
         })
 })
 
-//Add A Project
-router.post('/', (req, res) => {
-    
-    const data = {
-        name: req.body.name,
-        description: req.body.description
-    };
-    dBase('projects').insert(data)
-        .then(postedProject => {
-            dBase('projects').where({
-                    id: postedProject[0]
-                }).first()
-                .then(newProject => {
-                    res.status(201).json(newProject);
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(500).json({
-                        errorMessage: "Project could not be created",
-                        message: err.message
-                    });
-                });
-        })
+//Add a resource
 
-});
+router.post('/', (req, res) => {
+    const resourceData = req.body;
+
+    Resources.insert(resourceData)
+        .then(id => {
+            res.status(201).json({
+                created: id
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                errorMessage: "Account could not be created",
+                message: err.message
+            });
+        });
+})
+
+//Get resource by ID
+
+router.get('/:id', (req, res) => {
+    const id = req.params.id
+    dBase('resources').where({
+            id: id
+        }).select('id')
+        .then(resourceId => {
+            res.status(200).json(resourceId)
+        })
+        .catch(err => {
+            res.status(500).json({
+                errorMessage: "Resource ID cannot be retrieved",
+                message: err.message
+            })
+        })
+})
 
 module.exports = router;

@@ -20,15 +20,15 @@ Follow these steps to set up and work on your project:
 - [X] Add your _Team Lead_ as collaborator on Github.
 - [X] Clone your forked version of the Repository.
 - [X] Create a new Branch on the clone: git checkout -b `firstName-lastName`.
-- [ ] Implement the project on this Branch, committing changes regularly.
-- [ ] Push commits: git push origin `firstName-lastName`.
+- [X] Implement the project on this Branch, committing changes regularly.
+- [X] ] Push commits: git push origin `firstName-lastName`.
 
 Follow these steps for completing your project.
 
-- [ ] Submit a Pull-Request to merge `firstName-lastName` Branch into master on **your fork, don't make Pull Requests against Lambda's repository**.
-- [ ] Please don't merge your own pull request.
-- [ ] Add your _Team Lead_ as a Reviewer on the Pull-request
-- [ ] Your _Team Lead_ will count the challenge as done by merging the branch into _master_.
+- [X] Submit a Pull-Request to merge `firstName-lastName` Branch into master on **your fork, don't make Pull Requests against Lambda's repository**.
+- [X] Please don't merge your own pull request.
+- [X] Add your _Team Lead_ as a Reviewer on the Pull-request
+- [X] Your _Team Lead_ will count the challenge as done by merging the branch into _master_.
 
 ## Commits
 
@@ -63,11 +63,11 @@ Complete the following tasks:
   - [X] when adding a `task` the client must provide the `id` of an existing project.
   - [X] for `projects` and `tasks` if no value is provided for the `completed` property, the API should provide a default value of `false`.
 - [ ] Build an API with endpoints for:
-  - [] adding resources.
+  - [X] adding resources.
   - [X] retrieving a list of resources.
-  - [ ] adding projects.
+  - [X] adding projects.
   - [X] retrieving a list of projects.
-  - [ ] adding tasks.
+  - [X] adding tasks.
   - [X] retrieving a list of tasks. **The list of tasks should include the project name and project description**.
 
 ### Entities
