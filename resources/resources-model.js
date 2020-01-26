@@ -1,7 +1,10 @@
+const db = require('../data/dbConfig');
+
 module.exports = {
-    resourceList
+    find,
 }
 
-function resourceList() {
-    return
+function find() {
+    //select * from resources
+    return db.select('*').from('resources')
 }

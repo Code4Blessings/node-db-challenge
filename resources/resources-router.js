@@ -2,20 +2,22 @@ const express = require('express');
 
 const router = express.Router();
 
-const dBase = require('../data/dbConfig');
+const dB = require('../data/dbConfig');
+
+const Resources = require('./resources-model')
 
 //Get resources list
 
 router.get('/', (req, res) => {
- dBase.select('*')
-       .from('resources')
+ Resources.find()
     .then(resources => {
         res.status(200).json(resources)
     })
     .catch(err => {
         console.log(err);
         res.status(500).json({ 
-            errorMessage: "Error retrieving the list of resources"
+            errorMessage: "Error retrieving the list of resources", 
+            message: err.message
         })
     })
 })
@@ -68,7 +70,7 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const id = req.params.id 
-    dBase('resources'). where({
+    dBase('resources').where({
         id: id
     }).select('id')
     .then(resourceId => {
