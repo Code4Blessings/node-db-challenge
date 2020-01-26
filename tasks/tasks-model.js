@@ -11,9 +11,7 @@ function find() {
 }
 
 function findById(id) {
-    return db('tasks').where({
-        id
-    })
+    return db('tasks').where({id})
 }
 
 function insert(task) {

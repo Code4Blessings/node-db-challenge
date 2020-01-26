@@ -66,22 +66,6 @@ router.post('/', (req, res) => {
             });
         })
 
-//Get resource by ID
 
-router.get('/:id', (req, res) => {
-    const id = req.params.id 
-    dBase('resources').where({
-        id: id
-    }).select('id')
-    .then(resourceId => {
-        res.status(200).json(resourceId)
-    })
-    .catch(err => {
-        res.status(500).json({
-            errorMessage: "Resource ID cannot be retrieved",
-            message: err.message
-        })
-    })
-})
 
 module.exports = router;

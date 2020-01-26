@@ -6,7 +6,7 @@ const dB = require('../data/dbConfig');
 
 const Tasks = require('./tasks-model')
 
-//Get projects list
+//Get tasks list
 
 router.get('/', (req, res) => {
 
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const id = req.params.id;
 
-    Projects.findById(id)
+    Tasks.findById(id)
         .then(tasks => {
             const task = tasks[0];
 
@@ -36,24 +36,24 @@ router.get('/:id', (req, res) => {
                 res.json(task);
             } else {
                 res.status(404).json({
-                    errorMessage: 'Could not find project'
+                    errorMessage: 'Could not find task'
                 })
             }
         })
         .catch(err => {
             res.status(500).json({
-                errorMessage: "Project ID cannot be retrieved",
+                errorMessage: "Task ID cannot be retrieved",
                 message: err.message
             })
         })
 })
 
-//Add a resource
+//Add a task
 
 router.post('/', (req, res) => {
-    const resourceData = req.body;
+    const taskData = req.body;
 
-    Tasks.insert(resourceData)
+    Tasks.insert(taskData)
         .then(id => {
             res.status(201).json({
                 created: id
@@ -62,7 +62,7 @@ router.post('/', (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                errorMessage: "Account could not be created",
+                errorMessage: "Task could not be created",
                 message: err.message
             });
         });

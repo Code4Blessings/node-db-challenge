@@ -48,42 +48,24 @@ router.get('/:id', (req, res) => {
         })
 })
 
-//Add a resource
+//Add a project
 
 router.post('/', (req, res) => {
     const projectData = req.body;
 
     Projects.insert(projectData)
         .then(id => {
-            res.status(201).json({
-                created: id
-            })
+            res.status(201).json({created: id })
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                errorMessage: "Account could not be created",
+                errorMessage: "Project could not be created",
                 message: err.message
             });
         });
 })
 
-//Get resource by ID
 
-router.get('/:id', (req, res) => {
-    const id = req.params.id
-    dBase('projects').where({
-            id: id
-        }).select('id')
-        .then(projectId => {
-            res.status(200).json(projectId)
-        })
-        .catch(err => {
-            res.status(500).json({
-                errorMessage: "Project ID cannot be retrieved",
-                message: err.message
-            })
-        })
-})
 
 module.exports = router;
