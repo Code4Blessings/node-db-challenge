@@ -51,9 +51,9 @@ router.get('/:id', (req, res) => {
 //Add a resource
 
 router.post('/', (req, res) => {
-    const resourceData = req.body;
+    const projectData = req.body;
 
-    Resources.insert(resourceData)
+    Projects.insert(projectData)
         .then(id => {
             res.status(201).json({
                 created: id
@@ -72,15 +72,15 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const id = req.params.id
-    dBase('resources').where({
+    dBase('projects').where({
             id: id
         }).select('id')
-        .then(resourceId => {
-            res.status(200).json(resourceId)
+        .then(projectId => {
+            res.status(200).json(projectId)
         })
         .catch(err => {
             res.status(500).json({
-                errorMessage: "Resource ID cannot be retrieved",
+                errorMessage: "Project ID cannot be retrieved",
                 message: err.message
             })
         })

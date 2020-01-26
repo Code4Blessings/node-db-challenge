@@ -7,7 +7,6 @@ module.exports = {
 }
 
 function find() {
-    //select * from resources
     return db.select('*').from('projects')
 }
 
