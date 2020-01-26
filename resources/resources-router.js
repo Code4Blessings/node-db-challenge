@@ -9,6 +9,7 @@ const Resources = require('./resources-model')
 //Get resources list
 
 router.get('/', (req, res) => {
+
  Resources.find()
     .then(resources => {
         res.status(200).json(resources)
@@ -22,15 +23,22 @@ router.get('/', (req, res) => {
     })
 })
 
-//Get resource list by id
+//Retrieve resource list by id
 
 router.get('/:id', (req, res) => {
-    const id = req.params.id
-    dBase('resources'). where({
-        id: id
-    }).select('id')
-    .then(resourceId => {
-        res.status(200).json(resourceId)
+    const id = req.params.id;
+
+    Resources.findById(id)
+    .then(resources => {
+        const resource = resources[0];
+
+        if(resource) {
+            res.json(resource);
+        }else {
+            res.status(404).json({
+                errorMessage: 'Could not find resource'
+            })
+        }
     })
     .catch(err => {
         res.status(500).json({
@@ -43,28 +51,20 @@ router.get('/:id', (req, res) => {
 //Add a resource
 
 router.post('/', (req, res) => {
-    const data = {
-        name: req.body.name,
-        decription: req.body.description
-    };
-    resourceData('resources').insert(data)
-        .then(postedAccount => {
-            dBase('accounts').where({
-                    id: postedAccount[0]
-                }).first()
-                .then(newAccount => {
-                    res.status(201).json(newAccount);
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(500).json({
-                        errorMessage: "Account could not be created",
-                        message: err.message
-                    });
-                });
-        })
+    const resourceData = req.body;
 
-});
+        Resources.insert(resourceData)
+        .then(id => {
+            res.status(201).json({created: id})
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                    errorMessage: "Account could not be created",
+                    message: err.message
+             });
+            });
+        })
 
 //Get resource by ID
 
